@@ -1,0 +1,233 @@
+@charset "UTF-8";
+
+.intro-text{
+	  font-size: 90px;
+      font-weight: 700;
+      line-height: 50px;
+      margin-bottom: 25px;
+      font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: LightSlateGrey;
+}
+
+.centered{
+	text-align:center;
+	
+}
+
+.home-background{
+	background-image: url("https://i1.wp.com/thelocalstretch.com/wp-content/uploads/2017/07/IMG_4383-1.jpg?fit=2000%2C1124");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.member-background{
+	background-image: url("https://www.t-nation.com/system/publishing/articles/10005529/original/6-Reasons-You-Should-Never-Open-a-Gym.png?1509471214");
+	background-repeat: no-repeat;
+	background-position: top;
+	background-attachment: fixed;
+	background-size: 100% 50%;
+}
+
+.member-background2{
+	background-image: url("https://i.pinimg.com/originals/96/6a/7b/966a7b0fa51a0e145aa6b2fe8cd56923.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+
+.top-navigation{
+	overflow: hidden;
+	background-color:#333;
+}
+.top-navigation a{
+	float:left;
+	color:#f2f2f2;
+	text-align:center;
+	padding: 5px 5px;
+	text-decoration: none;
+	font-size: 175%;
+	height: 35px;
+	width: 15%;
+}
+.top-navigation a:hover{
+	background-color:#ddd;
+	color:black;
+}
+.top-navigation a.active{
+	background-color:#4CAF50;
+	color:white;
+}
+
+
+.top-navigation2{
+	overflow: hidden;
+	background-color:#333;
+}
+.top-navigation2 a{
+	float:left;
+	color:#f2f2f2;
+	text-align:center;
+	padding: 5px 5px;
+	text-decoration: none;
+	font-size: 150%;
+	height: 35px;
+	width: 15%;
+}
+.top-navigation2 a:hover{
+	background-color:#ddd;
+	color:black;
+}
+.top-navigation2 a.active{
+	background-color:#4CAF50;
+	color:white;
+}
+
+
+.Login-button{
+	background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+}
+.Login-button:hover{
+	opacity:0.8;
+}
+
+.Newuser-button{
+	background-color: #ff0000;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+}
+.Newuser-button:hover{
+	opacity:0.8;
+}
+
+.MembershipInfo-button{
+	background-color: #FFD700;
+	Color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 50%;
+}
+
+.MembershipInfo-button:hover{
+	opacity:0.8;
+}
+
+.Login-image{
+	text-align:center;
+	margin: 24 px 0 12 px 0;
+}
+
+.image-format{
+	width:30%;
+	height:30%;
+	border-radius:50%;
+}
+
+.Login-box{
+	font-family: Arial, Helvetica, sans-serif;    
+    text-align:center;
+}
+
+.Password-box{
+	font-family: Arial, Helvetica, sans-serif;    
+    text-align:center;
+    font-size: 150%;
+}
+
+.Search-box{
+	font-family: Arial, Helvetica, sans-serif;    
+    text-align:center;
+    font-size: 150%;
+}
+
+.Login-format{
+	width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    color:black;
+}
+
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+}
+.close:hover,
+.close:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 75%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: #474e5d;
+    padding-top: 50px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; 
+    border: 1px solid #888;
+    width: 80%; 
+}
+
+.Newuser-format{
+	width: 75%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+
+#custom{
+	font-family: Arial, Helvetica, sans-serif;
+	color: #f9f9f9;
+	text-align: left;
+	border-collapse: collapse;
+	width: 90%;
+}
+
+#custom td, #custom th{
+	border: 1px solid White;
+	padding: 8px;
+}
+
+#custom tr:nth-child(even){
+	background-color: #998c20;
+}
+
+
+

@@ -1,0 +1,166 @@
+package GymBuddy;
+
+
+import java.sql.*;
+import java.util.Date;
+
+
+public class accountMgr {
+	public static User temp;
+	public boolean validateUser(String name, String pw) {
+		boolean validLogin = false;
+		try {
+			//defining sql db driver to use
+			Class.forName("com.mysql.jdbc.Driver"); 
+			//DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/gymbuddy", "qvbingo", "ognib646");
+			
+			//prepared   statement is used for secure access
+			// ? used for data to put in query
+			// actual query to execute is
+			// select * from members where username = name and password = pass
+			PreparedStatement oPrStmt = con
+					.prepareStatement("select * from members where username=? and password=?");// ? represents some parameter to include
+			
+			oPrStmt.setString(1, name); //setting paramter 1 in prepared stmt to name
+			oPrStmt.setString(2, pw); 	//setting parameter 2 in prepared stmt to pw
+			ResultSet resultMembers = oPrStmt.executeQuery();	//execute query
+			
+			if(resultMembers.next()) {
+				String uName = resultMembers.getString("username");
+				String pWord = resultMembers.getString("password");
+				String fName = resultMembers.getString("firstName");
+				String lName = resultMembers.getString("lastName");
+				int iD = resultMembers.getInt("id");
+				validLogin = true;
+				
+				temp = new User(uName, pWord, fName, lName);
+			}
+			System.out.println(temp.getUname());
+			System.out.println(temp.getPword());
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}	
+		return validLogin;
+	}
+	
+	public boolean createAccount(String uName, String pw, String first, String last) {
+		boolean accountCreated = false;
+		
+		try {
+			//defining sql db driver to use
+			Class.forName("com.mysql.jdbc.Driver"); 
+			
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/gymbuddy", "qvbingo", "ognib646");
+			
+			//prepared   statement is used for secure access
+			// ? used for data to put in query
+			// actual query to execute is
+			// select * from members where username = name and password = pass
+			PreparedStatement oPrStmt = con
+					.prepareStatement("select * from counter where field = members");// ? represents some parameter to include
+			
+			ResultSet resultMembers = oPrStmt.executeQuery();	//execute query
+			int countMember = resultMembers.getInt("count");
+			
+			String sql = "INSERT INTO members (username, password, firstName, lastName, id) "
+					+ "VALUES (?, ?, ?, ?,?)";
+			
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setString(1, uName);
+			statement.setString(2, pw);
+			statement.setString(3, first);
+			statement.setString(4, last);
+			statement.setInt(5, countMember+1);
+			
+			
+			
+			int rowsInserted = statement.executeUpdate();
+			if (rowsInserted > 0) {
+				accountCreated = true;
+				String sql2 = "UPDATE counter SET count = ? WHERE field = members";
+				PreparedStatement updateStmt = con.prepareStatement(sql2);
+				updateStmt.setInt(1, countMember+1);
+			}
+			
+		}
+			catch (Exception e) {
+				System.out.println(e);
+			}
+		return accountCreated;
+		
+	}
+	
+	@SuppressWarnings("deprecation")
+	public int extendShip(User user, int months) {
+		user.getExpire().setMonth(user.getExpire().getMonth()+months);
+		user.setBalance(user.getBalance() + months*50);
+		user.detActive();
+		//System.out.println("Your new expiration date is: " + dateExpire);
+		//System.out.println("Your new balance is: " + balanceDue);
+		saveUserInfo(user);
+		return user.getBalance();
+	}
+	
+	public int cancelShip(User user) {
+		int diff=0;
+		if(user.getExpire().getYear()==new Date().getYear())
+		{
+			diff=Math.abs(user.getExpire().getMonth()-new Date().getMonth());
+		}
+		else
+		{
+			diff=12-new Date().getMonth()+user.getExpire().getMonth();
+		}
+		user.setBalance(user.getBalance()-(diff*50));
+		user.setExpire(new Date());
+		user.deactivate();
+		return user.getBalance();
+	}
+	
+	public boolean saveUserInfo(User user) {
+		boolean infoSaved = false;
+		try {
+			//defining sql db driver to use
+			Class.forName("com.mysql.jdbc.Driver"); 
+			
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/gymbuddy", "qvbingo", "ognib646");
+			
+			//prepared   statement is used for secure access
+			// ? used for data to put in query
+			// actual query to execute is
+			// select * from members where username = name and password = pass
+			
+			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-mm-dd");
+			String newExpire = sdf.format(user.getExpire());
+		
+			String update = "UPDATE members SET username=?, password=?, firstName=?, lastName=?,"
+					+ "dateExpire=?, active=?, balancer=? WHERE id = ?";
+			PreparedStatement updateUser = con
+					.prepareStatement(update);// ? represents some parameter to include
+			updateUser.setString(1, user.getUname());
+			updateUser.setString(2, user.getPword());
+			updateUser.setString(3, user.getFirst());
+			updateUser.setString(4, user.getLast());
+			updateUser.setString(5, newExpire);
+			updateUser.setBoolean(6,user.getActive());
+			updateUser.setInt(7, user.getBalance());
+			updateUser.setInt(8, user.getId());
+			
+			int rowsUpdated = updateUser.executeUpdate();
+			if (rowsUpdated > 0)
+				infoSaved = true;
+			return infoSaved;
+
+		
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		return infoSaved;
+	}
+}

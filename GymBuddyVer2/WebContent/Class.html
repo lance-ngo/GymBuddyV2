@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search Class</title>
+<link href = "GymWeb.css" rel = "stylesheet" type = "text/css">
+</head>
+
+<body class = "member-background2">
+<div class = "top-navigation2">
+  <a href = "index.html">Home</a>
+  <a href = "MemberProfile.html">Profile</a>
+  <a href = "CPassword.html">Change Password</a>
+  <a href = "Trainer.html">Find Trainers</a>
+  <a class = "active" href = "Class.html">Enroll Class</a>
+  <a href = "ManageMembership.html">Manage Membership</a>
+</div>
+<div class = "member-background">
+<br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+<form action = "SearchClassServlet" method = "post">
+<div class = "Search-box">
+   <label class = "Login-format" for = "class-search"><b>Enter the class you want to search</b></label>
+   <input class = "Login-format" type = "text" placeholder = "Enter the name of class" name = "class-name" required>
+   <button class = "Login-button" type = "submit" ><b>Search</b></button>; 
+
+</div>
+</form>
+
+</body>
+
+</html>
