@@ -36,16 +36,17 @@
  <%
  SearchClassServlet.mgr.SearchClassN(request.getParameter("class-name"));
  ArrayList<GymClass> search= SearchClassServlet.mgr.result;%>
+ 
  <script>
  function clearTable()
  {
-	 var new_tbody = document.createElement('tbody');
-	 populate_with_new_rows(new_tbody);
-	 old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+	 var myTable = document.getElementById("custom"); 
+	 var rowCount = myTable.rows.length; 
+	 for (var x=rowCount-1; x>0; x--) { myTable.deleteRow(x);
+
  }
  
  </script>
-clearTable();
  <% for(int i=0;i<search.size();i++) { %>
  <tbody>
 	 <tr>
@@ -61,7 +62,8 @@ clearTable();
 	 		<%}
 	 		else
 	 		{%>
-	 			<td> <button onClick="<% SearchClassServlet.mgr.updateClassEnrollment(search.get(i).id ,search.get(i).enrolled,i);%>;setValue(<%= search.get(i).id %>);">Sign Up</button></td>
+	 			<td> <button onClick="<% SearchClassServlet.mgr.updateClassEnrollment(search.get(i).id ,search.get(i).enrolled,i);%>;setValue(<%= search.get(i).id %>);
+	 			clearTable();">Sign Up</button></td>
 	 		<%}%>
 	 	
 	 </tr>

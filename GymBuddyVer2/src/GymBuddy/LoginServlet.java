@@ -21,14 +21,12 @@ import javax.servlet.http.HttpServletResponse;
 * 
 */
 		private static final long serialVersionUID = -5034226832463270122L;
-		static accountMgr Act=new accountMgr(); 
+		 public static accountMgr Act=new accountMgr(); 
 
 
 		public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
 
 			String n=request.getParameter("username");
 			String p=request.getParameter("password");
@@ -36,18 +34,44 @@ import javax.servlet.http.HttpServletResponse;
 			System.out.println(p);
 			if(Act.validateUser(n,p))
 			{
-				//response.sendRedirect("Welcome as called by sendRedirect");
-				RequestDispatcher rd=request.getRequestDispatcher("MemberProfile.html");
+				
+				RequestDispatcher rd=request.getRequestDispatcher("MemberProfile.jsp");
 				rd.forward(request,response);
 			}
 
 			else {
-				out.print("Sorry username or password error");
+				
 				RequestDispatcher rd=request.getRequestDispatcher("LoginFail.html");
 				rd.include(request,response);
 				}
 
-				out.close();
+				
 		}
+		
+		public void doGet(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+
+				
+	
+				String f=request.getParameter("firstN");
+				String l=request.getParameter("lastN");
+				String u=request.getParameter("userN");
+				String p=request.getParameter("password");
+				if(Act.createAccount(u, p, f, l))
+				{
+					RequestDispatcher rd=request.getRequestDispatcher("createSuccess.jsp");
+					rd.forward(request,response);
+				}
+				else
+				{
+					RequestDispatcher rd=request.getRequestDispatcher("createFail.jsp");
+					rd.forward(request,response);
+				}
+				
+				
+				
+
+				
+			}
 
 }

@@ -3,103 +3,8 @@ package GymBuddy;
 import java.util.*;
 import java.util.Scanner;
 
-/*public class userTree {
-	TreeSet<User> tree;
-	Scanner scan;
-	ArrayList<User> tree2;
-	TreeSet<GymClass> tree3;
-	public userTree()
-	{
-		tree=new TreeSet<>();
-		tree2=new ArrayList<User>();
-		scan =new Scanner(System.in);
-	}
-	
-	public boolean addUser(String fN, String ln, String uN, String pW)
-	{
-		User u1 = new User(fN, ln, uN, pW);
-		u1.id=tree.size()+1;
-		boolean b=tree.add(u1);
-		if(b)
-		{
-			tree2=new ArrayList<>(tree);
-		}
-		return b;
-	}
-	
-	public boolean addUser()
-	{
-		scan =new Scanner(System.in);
-		
-		System.out.println("Registering new user. Please enter your username.");
-		String u= scan.nextLine();
-		System.out.println("Please enter your password.");
-		String p=scan.nextLine();
-		System.out.println("Please enter your first name.");
-		String f=scan.nextLine();
-		System.out.println("Please enter your last name.");
-		String l=scan.nextLine();
-		User u1= new User(u,p,f,l);
-		u1.id=tree.size()+1;
-		boolean b=tree.add(u1);
-		if(b)
-		{
-			tree2=new ArrayList<>(tree);
-		}
-		return b;
-		
-		
-	}
-	public void close()
-	{
-		scan.close();
-	}
-	
-	@SuppressWarnings("unused")
-	public void logIn()// implement binary search later!!!!
-	{
-		
-		
-		System.out.println("Logging in. Please enter your username.");
-		String u= scan.nextLine();
-		System.out.println("Please enter your password.");
-		String p=scan.nextLine();
-		ArrayList<User> list=new ArrayList<>(tree);
-		int ct;
-		if(list.size()%2==0)
-		{
-			ct=list.size()/2;
-		}
-		else
-		{
-			ct=(list.size()/2)+1;
-		}
-				
-			
-		for(User k: tree)
-		{
-			if(k.username.compareTo(u)==0)
-			{
-				if(k.password.compareTo(p)==0)
-				{
-					System.out.println("Login successful!");
-					return;
-				}
-				else
-				{
-					System.out.println("Incorrect login credentials.");
-					return;
-				}
-				
-			}
-					
-			
-		}
-		System.out.println("User does not exist");
-		return;
-	}
-	*/
-	 class  User implements Comparable
+
+	public class  User implements Comparable
 	{
 		private String username;
 		private String password;
@@ -119,6 +24,7 @@ import java.util.Scanner;
 			lastN=l;
 			
 			dateExpire = new Date();
+			
 			active = false;
 			balanceDue = 0;
 		}

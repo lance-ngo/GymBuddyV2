@@ -14,6 +14,7 @@ public class WorkoutManager {
 	
 	public void SearchClassN(String Name)
 	{
+		result.clear();
 		try {
 			//defining sql db driver to use
 			Class.forName("com.mysql.jdbc.Driver"); 
@@ -26,9 +27,9 @@ public class WorkoutManager {
 			// actual query to execute is
 			// select * from members where username = name and password = pass
 			PreparedStatement oPrStmt = con
-					.prepareStatement("select * from workouts where name=?");// ? represents some parameter to include
+					.prepareStatement("select * from workouts where name LIKE ?");// ? represents some parameter to include
 			
-			oPrStmt.setString(1, Name); //setting paramter 1 in prepared stmt to name
+			oPrStmt.setString(1, "%"+Name + "%"); //setting paramter 1 in prepared stmt to name
 			ResultSet resultWorkout = oPrStmt.executeQuery();	//execute query
 			
 			while(resultWorkout.next())// display results add later
@@ -50,7 +51,7 @@ public class WorkoutManager {
 	}
 
 	
-	public boolean addWorkout(String name, String instructor, java.sql.Date date, java.sql.Time time, int capacity)
+	public boolean addWorkout(String name, String instructor, java.sql.Date date, int time, int capacity)
 	{
 		int ct=0;
 		try {
@@ -78,7 +79,7 @@ public class WorkoutManager {
 			oPrStmnt2.setString(2, name);
 			oPrStmnt2.setString(3, instructor);
 			oPrStmnt2.setDate(4, date);
-			oPrStmnt2.setTime(5, time);
+			oPrStmnt2.setInt(5, time);
 			oPrStmnt2.setInt(6, capacity);
 			oPrStmnt2.setString(7,"");
 			int rowsInserted = oPrStmnt2.executeUpdate();

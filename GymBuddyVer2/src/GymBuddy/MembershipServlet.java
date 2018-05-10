@@ -2,6 +2,8 @@ package GymBuddy;
 
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +38,10 @@ public class MembershipServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO  cancel membership
-		doGet(request, response);
+		String n=request.getParameter("data");
+		System.out.println(n);
+		RequestDispatcher rd=request.getRequestDispatcher("LoginFail.html");
+		rd.include(request,response);
 	}
 	
 	
