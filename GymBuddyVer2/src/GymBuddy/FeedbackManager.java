@@ -15,7 +15,7 @@ public class FeedbackManager
 			Connection con = DriverManager.getConnection(
 				"jdbc:mysql://localhost:3306/gymbuddy", "qvbingo", "ognib646");
 			PreparedStatement oPrStmt = con
-				.prepareStatement("SELECT * FROM counter where field = feedbacks ");
+				.prepareStatement("SELECT * FROM counter where type = feedbacks ");
 			
 			ResultSet resultFeedback=oPrStmt.executeQuery();
 			int id = resultFeedback.getInt("count");
@@ -31,7 +31,7 @@ public class FeedbackManager
 			int rowsInserted= statement.executeUpdate(); 
 			if(rowsInserted > 0) {
 				System.out.println("A new feedback was collected successfully!");
-				String sql2="UPDATE counter SET count= ? WHERE field = feedback";
+				String sql2="UPDATE counter SET count= ? WHERE type = feedback";
 				PreparedStatement updateStmt = con.prepareStatement(sql2);
 				updateStmt.setInt(1, id+1);
 			}

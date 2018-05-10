@@ -10,17 +10,19 @@ public class GymClass{// all classes are 30 min
 	public int id;
 	public String name;
 	public String instructor;
-	public Date date;
+	public String date;
 	public int time;
 	public int capacity;
 	public int enrolled;
 	
-	public GymClass(String na, String instr, int tim, int cap, int enr ) {
+	public GymClass(String na, String instr, String woDate, int tim, int cap, int enr, int idNo) {
 		name = na;
 		instructor = instr;
+		date = woDate;
 		time = tim;
 		capacity = cap;
 		enrolled = enr;
+		id = idNo;
 	}
 	
 

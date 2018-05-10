@@ -1,7 +1,7 @@
 package GymBuddy;
 
 
-
+import java.util.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,15 +32,21 @@ public class WorkoutManager {
 			oPrStmt.setString(1, "%"+Name + "%"); //setting paramter 1 in prepared stmt to name
 			ResultSet resultWorkout = oPrStmt.executeQuery();	//execute query
 			
+			java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-mm-dd");
+			//String newExpire = sdf.format(user.getExpire());
+			
 			while(resultWorkout.next())// display results add later
 			{
 				String n = resultWorkout.getString("name");
 				String i = resultWorkout.getString("instructor");
+				java.sql.Date d = resultWorkout.getDate("date");
+				String woDate = sdf.format(d);
 				int t = resultWorkout.getInt("time");
 				int c = resultWorkout.getInt("capacity");
 				int e = resultWorkout.getInt("enrolled");
+				int idN = resultWorkout.getInt("id");
 				
-				GymClass workout = new GymClass(n, i, t, c, e);
+				GymClass workout = new GymClass(n, i, woDate, t, c, e, idN);
 				result.add(workout);
 			}
 			
@@ -146,6 +152,7 @@ public class WorkoutManager {
 			PreparedStatement statement = con.prepareStatement("UPDATE workouts set enrolled=? WHERE id=?");
 			statement.setInt(1, enrollct+1);
 			statement.setInt(2, id);
+			
 			 
 			int rowsDeleted = statement.executeUpdate();
 			if (rowsDeleted > 0) {

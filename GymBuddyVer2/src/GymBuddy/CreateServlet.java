@@ -1,12 +1,7 @@
 package GymBuddy;
 
-
-
-import java.io.File;
 import java.io.IOException;
-import java.lang.*;
-import java.io.PrintWriter;
-import java.util.*;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 /**
- * Servlet implementation class SearchClassServlet
+ * Servlet implementation class CreateServlet
  */
-@WebServlet("/SearchClassServlet")
-public class SearchClassServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;;
+@WebServlet("/CreateServlet")
+public class CreateServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
        
-	public static WorkoutManager mgr=new WorkoutManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchClassServlet() {
+    public CreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +28,7 @@ public class SearchClassServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO 
+		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -44,13 +36,22 @@ public class SearchClassServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO 
-		String n=request.getParameter("class-name");
-	RequestDispatcher rd=request.getRequestDispatcher("SearchResult.jsp");
-	rd.forward(request,response);
-		
-		
-	
+		// TODO Auto-generated method stub
+
+		String f=request.getParameter("firstN");
+		String l=request.getParameter("lastN");
+		String u=request.getParameter("userN");
+		String p=request.getParameter("password");
+		if(LoginServlet.Act.createAccount(u, p, f, l))
+		{
+			RequestDispatcher rd=request.getRequestDispatcher("Test.jsp");
+			rd.forward(request,response);
+		}
+		else
+		{
+			RequestDispatcher rd=request.getRequestDispatcher("LoginFail.html");
+			rd.forward(request,response);
+		}
 	}
 
 }

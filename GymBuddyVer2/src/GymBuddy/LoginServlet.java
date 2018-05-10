@@ -59,12 +59,12 @@ import javax.servlet.http.HttpServletResponse;
 				String p=request.getParameter("password");
 				if(Act.createAccount(u, p, f, l))
 				{
-					RequestDispatcher rd=request.getRequestDispatcher("createSuccess.jsp");
+					RequestDispatcher rd=request.getRequestDispatcher("Test.jsp");
 					rd.forward(request,response);
 				}
 				else
 				{
-					RequestDispatcher rd=request.getRequestDispatcher("createFail.jsp");
+					RequestDispatcher rd=request.getRequestDispatcher("LoginFail.html");
 					rd.forward(request,response);
 				}
 				

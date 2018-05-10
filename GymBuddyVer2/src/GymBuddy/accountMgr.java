@@ -55,16 +55,19 @@ public class accountMgr {
 			
 			Connection con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/gymbuddy", "qvbingo", "ognib646");
-			
+			int countMember = 0;
 			//prepared   statement is used for secure access
 			// ? used for data to put in query
 			// actual query to execute is
 			// select * from members where username = name and password = pass
 			PreparedStatement oPrStmt = con
-					.prepareStatement("select * from counter where field = members");// ? represents some parameter to include
+					.prepareStatement("SELECT * from counter WHERE type = ?");// ? represents some parameter to include
+			oPrStmt.setString(1, "members");
 			
 			ResultSet resultMembers = oPrStmt.executeQuery();	//execute query
-			int countMember = resultMembers.getInt("count");
+			if(resultMembers.next()) {
+				countMember = resultMembers.getInt("count")+1;
+			}
 			
 			String sql = "INSERT INTO members (username, password, firstName, lastName, id) "
 					+ "VALUES (?, ?, ?, ?,?)";
@@ -74,16 +77,17 @@ public class accountMgr {
 			statement.setString(2, pw);
 			statement.setString(3, first);
 			statement.setString(4, last);
-			statement.setInt(5, countMember+1);
+			statement.setInt(5, countMember);
 			
 			
 			
 			int rowsInserted = statement.executeUpdate();
 			if (rowsInserted > 0) {
 				accountCreated = true;
-				String sql2 = "UPDATE counter SET count = ? WHERE field = members";
+				String sql2 = "UPDATE counter SET count = ? WHERE type = ?";
 				PreparedStatement updateStmt = con.prepareStatement(sql2);
-				updateStmt.setInt(1, countMember+1);
+				updateStmt.setInt(1, countMember);
+				updateStmt.setString(2, "members");
 			}
 			
 		}
@@ -118,6 +122,7 @@ public class accountMgr {
 		user.setBalance(user.getBalance()-(diff*50));
 		user.setExpire(new Date());
 		user.deactivate();
+		saveUserInfo(user);
 		return user.getBalance();
 	}
 	
