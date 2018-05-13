@@ -47,7 +47,7 @@
 	text-decoration: none;
 	font-size: 175%;
 	height: 35px;
-	width: 15%;
+	width: 22%;
 }
 .top-navigation a:hover{
 	background-color:#ddd;
@@ -160,6 +160,17 @@
     box-sizing: border-box;
     color:black;
 }
+
+.Login-format2{
+	width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    color:white;
+}
+
 
 .close {
     position: absolute;

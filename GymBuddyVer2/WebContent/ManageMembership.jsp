@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.util.*,GymBuddy.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,14 +22,23 @@
 <div class = "member-background">
 <br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
-
+<%accountMgr mgr2=LoginServlet.Act;%>
 <form action = "MemebershipServlet" method = "post">
 <div class = "Search-box">
    <label class = "Newuser-format" for="months"><b>Enter the number of months you want to add/extend</b></label>
-   <input class = "Newuser-format" type="text" placeholder="Enter the number of months" name="months" required>
+   <input class = "Newuser-format" type="text" placeholder="Enter the number of months" name="months" id="months" required>
    <button class = "Login-button" type = "submit" ><b>Subscribe/Extend</b></button>; 
-   <button class = "MembershipInfo-button" name = "button1" onclick="document.getElementById('id01').style.display='block'"><b>Current Status</b></button>;
-   <button class = "Newuser-button" name = "button2" onclick="location.href='CancelConfirm.html';"><b>Cancel Membership</b></button>;
+   <br>
+   
+   <table id="custom">
+  <th> Membership Status</th>
+  
+	  <tr>Feature Unavailable </tr>
+  
+  
+   
+   </table>
+   <button class = "Newuser-button" name = "button2" onclick="<%mgr2.cancelShip(mgr2.temp);%>;location.href='CancelConfirm.html';"><b>Cancel Membership</b></button>;
 </div>
 </form>
 

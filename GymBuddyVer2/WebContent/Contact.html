@@ -2,19 +2,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ContactInfo</title>
+<title>Feedback</title>
 <link href = "GymWeb.css" rel = "stylesheet" type = "text/css">
 </head>
 
 <body class = "home-background">
 <div class = "top-navigation">
   <a href = "index.html">Home</a>
-  <a href = "LogIn.html">LogIn</a>
-  <a href = "Membership.html">Membership</a>
-  <a href = "NMTrainer.html">Trainers</a>
-  <a href = "NMClass.html">Class</a>
-  <a class = "active" href = "Contact.html">Contact</a>
+  <a href = "LogIn.html">Member LogIn</a>
+  <a href = "NMTrainer.html">Staff LogIn</a>
+  <a class = "active" href = "Contact.html">Give Feedback</a>
 </div>
 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<form action="FeedbackServlet" method="post">
+  <label class = "Login-format" for = "feedback"><b>Enter the feedback</b></label>
+  <input class = "Login-format" type = "text" placeholder = "Enter the text here" name = "feedback" required>
+  <button class = "Login-button" type = "submit"><b>Submit</b></button>; 
+</form>
 </body>
 </html>

@@ -20,8 +20,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-class>SearchClassServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>CreateServlet</servlet-name>
+    <servlet-name>StaffLoginServlet</servlet-name>
+    <servlet-class>StaffLoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CreateClassServlet</servlet-name>
     <servlet-class>CreateClassServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CreateServlet</servlet-name>
+    <servlet-class>CreateServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>FeedbackServlet</servlet-name>
@@ -34,6 +42,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <servlet-mapping>
     <servlet-name>GetFeedbackServlet</servlet-name>
     <url-pattern>/GetFeedbackServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StaffLoginServlet</servlet-name>
+    <url-pattern>/StaffLoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CreateClassServlet</servlet-name>
+    <url-pattern>/CreateClassServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>CreateServlet</servlet-name>
@@ -52,6 +68,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <url-pattern>/FeedbackServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>Test.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 </web-app>

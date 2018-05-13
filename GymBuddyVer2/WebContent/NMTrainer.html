@@ -2,20 +2,46 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TrainerInfo for Guest</title>
+<title>StaffLogIn</title>
 <link href = "GymWeb.css" rel = "stylesheet" type = "text/css">
 </head>
 
 <body class = "home-background">
 <div class = "top-navigation">
   <a href = "index.html">Home</a>
-  <a href = "LogIn.html">LogIn</a>
-  <a href = "Membership.html">Membership</a>
-  <a class = "active" href = "NMTrainer.html">Trainers</a>
-  <a href = "NMClass.html">Class</a>
-  <a href = "Contact.html">Contact</a>
+  <a href = "LogIn.html">Member LogIn</a>
+  <a class = "active" href = "NMTrainer.html">Staff LogIn</a>
+  <a href = "Contact.html">Give Feedback</a>
 </div>
 
 
+<br><br><br><br>
+
+<div class = "Login-image">
+  <img src = "https://mi4.rightinthebox.com/images/384x384/201606/ojwrio1466243474898.jpg" class = "image-format">
+</div>
+
+<form id="form1" method = "post" action ="StaffLoginServlet" >
+<div class = "Login-box">
+  <label class = "Login-format" for = "username"><b>Username</b></label>
+  <input class = "Login-format" type = "text" placeholder = "Enter Username" name = "Staff-username" required>
+  
+  <label class = "Login-format" for = "password"><b>Password</b></label>
+  <input class = "Login-format" type = "password" placeholder = "Enter Password" name = "Staff-password" required>
+  
+  <button class = "Login-button" type = "button" onclick="setValue()"><b>Login</b></button>
+  
+</div>
+</form>
+<script>
+ function setValue()
+ {
+ 	 
+	
+	 
+	 document.getElementById("form1").submit();
+ }
+ </script>
 </body>
+
 </html>

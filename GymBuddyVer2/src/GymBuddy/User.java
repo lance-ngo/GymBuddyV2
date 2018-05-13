@@ -1,5 +1,6 @@
 package GymBuddy;
 
+import java.text.ParseException;
 import java.util.*;
 import java.util.Scanner;
 
@@ -24,7 +25,6 @@ import java.util.Scanner;
 			lastN=l;
 			
 			dateExpire = new Date();
-			
 			active = false;
 			balanceDue = 0;
 		}
@@ -126,12 +126,53 @@ import java.util.Scanner;
 	
 
 
-public static void main(String[] args) {
-	accountMgr act = new accountMgr();
-	if (act.validateUser("lance", "abc123"))
-		System.out.println("login successful");
-	else
-		System.out.println("login failed");
+public static void main(String[] args) throws ParseException {
+	int menuChoice = 0;
+	Scanner menuScan = new Scanner(System.in);
+	while(menuChoice != 9) {
+	
+	System.out.println("Select function");
+	System.out.println("1. Create new user");
+	System.out.println("2. Login Member");
+	System.out.println("3. Leave feedback");
+	System.out.println("4. View feedback");
+	System.out.println("5. Create workout");
+	System.out.println("9. Exit");
+	
+	menuChoice = menuScan.nextInt();
+	
+	switch(menuChoice) {
+	case 1:{
+		accountMgr mgr1 = new accountMgr();
+		mgr1.createInConsole();
+		break;
+			}
+	case 2:{
+		accountMgr mgr2 = new accountMgr();
+		mgr2.loginConsole();
+		break;
+			}
+	case 3:{
+		FeedbackManager consoleFb = new FeedbackManager();
+		consoleFb.addFbConsole();
+		break;
+	}
+	case 4:{
+		FeedbackManager getFb = new FeedbackManager();
+		getFb.getFeedback();
+		break;
+	}
+	case 5:{
+		WorkoutManager woConsole = new WorkoutManager();
+		woConsole.addWoConsole();
+		break;
+	}
+	
+	}
+	//menuScan.close();
+	
+	}
+	
 	
 	return;
 }

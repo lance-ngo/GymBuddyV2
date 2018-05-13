@@ -9,7 +9,7 @@
 <link href = "GymWeb.css" rel = "stylesheet" type = "text/css">
 </head>
 
-<body class = "home-background">
+<body class = "member-background2">
 <div class = "top-navigation">
   <a href = "index.html">Home</a>
   <a class = "active" href = "LogIn.html">LogIn</a>
@@ -17,6 +17,10 @@
   <a href = "NMTrainer.html">Trainers</a>
   <a href = "NMClass.html">Class</a>
   <a href = "Contact.html">Contact</a>
+</div>
+
+<div class = "member-background">
+<br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 
 <br><br><br><br>

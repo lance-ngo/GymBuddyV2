@@ -1,6 +1,5 @@
 package GymBuddy;
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class FeedbackServlet
+ * Servlet implementation class StaffLogin
  */
-@WebServlet("/FeedbackServlet")
-public class FeedbackServlet extends HttpServlet {
+@WebServlet("/StaffLoginServlet")
+public class StaffLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       static FeedbackManager feed=new FeedbackManager();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FeedbackServlet() {
+    public StaffLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,9 +37,7 @@ public class FeedbackServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String f=request.getParameter("feedback");
-		feed.addFeedback(f);
-		RequestDispatcher rd=request.getRequestDispatcher("index.html");
+		RequestDispatcher rd=request.getRequestDispatcher("Staff.html");
 		rd.forward(request,response);
 	}
 

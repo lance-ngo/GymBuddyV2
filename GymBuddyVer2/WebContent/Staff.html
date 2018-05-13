@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Staff</title>
+<link href = "GymWeb.css" rel = "stylesheet" type = "text/css">
+</head>
+
+<body class = "member-background2">
+<div class = "top-navigation">
+  <a href = "index.html">Home</a>
+  <a class = "active">Staff</a>
+  
+</div>
+<div class = "member-background">
+<br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+<div class = "Search-box">
+<button class = "Login-button" onclick="document.getElementById('id01').style.display='block'"><b>Add Gym Class</b></button>; 
+<button class = "Login-button" onclick="setValue();" ><b>View Feedback</b></button>; 
+</div>
+
+
+<script>
+ function setValue()
+ {
+ 	 
+
+	 document.getElementById("data").value="idk";
+	 document.getElementById("form1").submit();
+ }
+ </script>
+
+<div style ="display:none">
+ <form id="form1" method="post" action="GetFeedbackServlet">
+ <input type="hidden" name="data" id="data" value="">
+ </form></div>
+ 
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action="CreateClassServlet" method="post">
+    <div class="container">
+      <h1>Add Gym Class</h1>
+      <p>Please fill in this form to add a new gym class</p>
+      <hr>
+      <label class = "Newuser-format" for="username"><b>Name</b></label>
+      <input class = "Newuser-format" type="text" placeholder="Enter Class Name" name="ClassName" required>
+      
+      <label class = "Newuser-format" for="first-name"><b>Instructor</b></label>
+      <input class = "Newuser-format" type="text" placeholder="Enter InstructorName" name="Instructor-name" required>
+      
+      <label class = "Newuser-format" for="first-name"><b>Date(mm-dd-yyyy)</b></label>
+      <input class = "Newuser-format" type="text" placeholder="Enter date format mm-dd-yyyy)" name="Date" required>
+      
+      <label class = "Newuser-format" for="first-name"><b>Time</b></label>
+      <input class = "Newuser-format" type="text" placeholder="Enter Time" name="Time" required>
+      
+      <label class = "Newuser-format" for="first-name"><b>Capacity</b></label>
+      <input class = "Newuser-format" type="text" placeholder="Enter Capacity" name="Capacity" required>
+
+      
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="Newuser-button">Cancel</button>
+        <button type="submit" class="Login-button">Add</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+</body>
+
+</html>

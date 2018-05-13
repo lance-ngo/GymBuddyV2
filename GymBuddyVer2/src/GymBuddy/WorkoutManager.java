@@ -6,7 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.sql.Date;
 public class WorkoutManager {
 	public ArrayList<GymClass> result=new ArrayList<>();
@@ -55,11 +56,37 @@ public class WorkoutManager {
 			System.out.println(e);
 		}
 	}
-
+	
+	public boolean addWoConsole() throws ParseException {
+		Scanner woScan = new Scanner(System.in);
+		System.out.println("enter workout name, use trainer name for personal session");
+		String woName = woScan.nextLine();
+		System.out.println("enter instructor name ");
+		String nameInstruct = woScan.nextLine();
+		System.out.println("enter date, use mm-dd-yyyy format");
+		String dateString = woScan.nextLine();
+		
+		SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
+		java.util.Date date = sdf1.parse(dateString);
+		java.sql.Date sqlWoDate = new java.sql.Date(date.getTime());
+		
+		
+		System.out.println("enter time, 24hr without colon eg: 2030");
+		int timeWo = woScan.nextInt();
+		System.out.println("enter max capacity");
+		int cap = woScan.nextInt();
+		
+		if(addWorkout(woName, nameInstruct, sqlWoDate, timeWo, cap)) {
+			System.out.println("workout added");
+			return true;
+		}
+		System.out.println("failed to add workout");
+		return false;
+	}
 	
 	public boolean addWorkout(String name, String instructor, java.sql.Date date, int time, int capacity)
 	{
-		int ct=0;
+		boolean workoutAdded = false;
 		try {
 			//defining sql db driver to use
 			Class.forName("com.mysql.jdbc.Driver"); 
@@ -67,38 +94,50 @@ public class WorkoutManager {
 			Connection con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/gymbuddy", "qvbingo", "ognib646");
 			
+			int countWorkout = 0;
 			//prepared   statement is used for secure access
 			// ? used for data to put in query
 			// actual query to execute is
 			// select * from members where username = name and password = pass
+			String findCtr = "SELECT * from counter WHERE type = ?";
 			PreparedStatement oPrStmt = con
-					.prepareStatement("select * from workouts  where id > 0");// ? represents some parameter to include
-			ResultSet resultMembers = oPrStmt.executeQuery();	//execute query
+					.prepareStatement(findCtr);// ? represents some parameter to include
+			oPrStmt.setString(1, "workouts");
+		
 			
-			while(resultMembers.next())// display results add later
-			{
-				ct++;
-			}
+			ResultSet resultWorkouts = oPrStmt.executeQuery();	//execute query
+			resultWorkouts.next();
+			countWorkout = resultWorkouts.getInt("count")+1;
 			
-			PreparedStatement oPrStmnt2=con.prepareStatement("INSERT INTO workouts (name, instructor, date,time,capacity,enrolled,id) VALUES (?, ?, ?, ?,?,?,?)");
-			oPrStmnt2.setInt(1, ct++);
-			oPrStmnt2.setString(2, name);
-			oPrStmnt2.setString(3, instructor);
-			oPrStmnt2.setDate(4, date);
-			oPrStmnt2.setInt(5, time);
-			oPrStmnt2.setInt(6, capacity);
-			oPrStmnt2.setString(7,"");
-			int rowsInserted = oPrStmnt2.executeUpdate();
-			if (rowsInserted > 0)
-			{
-			    return true;
+			
+			String sql = "INSERT INTO workouts (id, name, instructor, date, time, capacity) "
+					+ "VALUES (?, ?, ?, ?, ?, ?)";
+			
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setInt(1, countWorkout);
+			statement.setString(2, name);
+			statement.setString(3, instructor);
+			statement.setDate(4, date);
+			statement.setInt(5, time);
+			statement.setInt(6, capacity);
+			
+			
+			
+			int newWorkouts = statement.executeUpdate();
+			if(newWorkouts >0) {
+				workoutAdded = true;
+				String sql2 = "UPDATE counter SET count = ? WHERE type = ?";
+				PreparedStatement updateStmt = con.prepareStatement(sql2);
+				updateStmt.setInt(1, countWorkout);
+				updateStmt.setString(2, "workouts");
+				updateStmt.execute();
 			}
 			 
 		}
 		catch (Exception e) {
 			System.out.println(e);
 		}
-		return false;
+		return workoutAdded;
 	}
 	
 	public boolean deleteWorkout(String name)

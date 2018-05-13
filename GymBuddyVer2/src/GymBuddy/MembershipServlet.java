@@ -39,9 +39,13 @@ public class MembershipServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO  cancel membership
 		String n=request.getParameter("data");
-		System.out.println(n);
-		RequestDispatcher rd=request.getRequestDispatcher("LoginFail.html");
-		rd.include(request,response);
+		
+			RequestDispatcher rd=request.getRequestDispatcher("ManageMembership.html");
+			rd.include(request,response);
+		
+		
+		
+		
 	}
 	
 	
